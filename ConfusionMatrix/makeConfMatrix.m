@@ -6,5 +6,13 @@ function [confMatrix] = makeConfMatrix(TrueLabel,TestLabel,Size)
 
 confMatrix = zeros(Size);
 for i=1:length(TrueLabel)
-    confMatrix(TestLabel(i),TrueLabel(i)) = confMatrix(TestLabel(i),TrueLabel(i)) + 1;
+    confMatrix(TrueLabel(i),TestLabel(i)) = confMatrix(TrueLabel(i),TestLabel(i)) + 1;
 end
+
+for i = 1:Size
+    s = sum(confMatrix(i,:));
+    for j = 1:Size
+        confMatrix(i,j) = confMatrix(i,j)*100/s;
+    end
+end
+    
